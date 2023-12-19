@@ -37,9 +37,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI youLose;
 
     public bool stopGame;
-    public bool paused;
     public bool isCindyDead;
-    private bool changeColor = false;
+    public bool paused = false;
     private bool changeText = false;
     public bool isNewHighScore = false;
     public bool levelTwo = false;
@@ -258,9 +257,10 @@ public class GameManager : MonoBehaviour
             pauseScreen.SetActive(true);
             Time.timeScale = 0;
             AudioManagerUI.instance.PlayUiPause();
+            
             music.gamePaused = 0; // FMOD snapshot
         }
-        else if (paused)
+        else
         {
             paused = false;
             pauseScreen.SetActive(false);
@@ -642,7 +642,6 @@ public class GameManager : MonoBehaviour
             Destroy(enemy);
         }
     }
-
 
     public void RestartGame()
     {

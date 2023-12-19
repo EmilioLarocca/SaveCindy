@@ -38,12 +38,19 @@ public class MoveEnemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (cindy.activeSelf && !gameManager.paused)
+        if (cindy.activeSelf)
         {
             ChaseCindy();
-            PlayFootsteps();
         }
-        else
+    }
+
+    void Update()
+    {
+        if (cindy.activeSelf && !gameManager.paused)
+        {
+            PlayFootsteps();
+        } 
+        else if (gameManager.paused)
         {
             StopFootsteps();
         }
@@ -73,9 +80,10 @@ public class MoveEnemy : MonoBehaviour
 
     public void PlayFootsteps()
     {
-        if (!footstepsSounds.IsPlaying())
+        if (!gameManager.paused && !footstepsSounds.IsPlaying())
         {
             footstepsSounds.Play();
+            Debug.Log("Playing footsteps...");
             enemyAnim.SetBool("IsWalking", true);
             enemyAnim.SetBool("GameOver", false);
         }
@@ -86,6 +94,7 @@ public class MoveEnemy : MonoBehaviour
         if (footstepsSounds.IsPlaying())
         {
             footstepsSounds.Stop();
+            Debug.Log("Stopping footsteps...");
             enemyAnim.SetBool("IsWalking", false);
         }
     }
