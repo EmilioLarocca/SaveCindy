@@ -24,7 +24,7 @@ public class Shooting : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && !gameManager.stopGame)
+        if (Input.GetButtonDown("Fire1") && !gameManager.paused)
         {
             FireBullet();
             shootingSound.Play();
